@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+/* Dark mode is a user toggle, not an OS-follow: the `dark` class on <html>
+decides (see components/DarkModeToggle.tsx). */
+@custom-variant dark (&:where(.dark, .dark *));

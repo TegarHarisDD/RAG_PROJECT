@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RAG Portfolio Demo</title>
+    <script>
+      // Set the theme class before first paint so dark-mode visitors never
+      // see a light flash; the toggle button in the app keeps it in step.
+      const theme =
+        localStorage.getItem('theme') ??
+        (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      document.documentElement.classList.toggle('dark', theme === 'dark')
+    </script>
   </head>
   <body>
     <div id="root"></div>
