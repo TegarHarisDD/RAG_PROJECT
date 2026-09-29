@@ -249,6 +249,25 @@ def run_ingestion(
     )
 
 
+def search_question(
+    question: str,
+    *,
+    config: ProviderConfig,
+    store: ChunkStore,
+    embed_fn: Callable[..., list[list[float]]] = embed,
+    k: int = 5,
+) -> list[dict[str, object]]:
+    """Embed one Question and search the store for its top-k Chunks.
+
+    The shared primitive of the ingest-time ``probe`` and ask-time retrieval
+    (``app.rag.retrieve``): one embed, one vector search, store order.
+    """
+    result = embed_fn([question], config=config)
+    if len(result) != 1:
+        raise IngestError(f"Embedding returned {len(result)} vectors for one question")
+    return store.search(result[0], k)
+
+
 def probe(
     question: str,
     *,
@@ -258,10 +277,7 @@ def probe(
     k: int = 5,
 ) -> list[dict[str, object]]:
     """Embed one Question and search the store — the manual verification probe."""
-    result = embed_fn([question], config=config)
-    if len(result) != 1:
-        raise IngestError(f"Embedding returned {len(result)} vectors for one question")
-    return store.search(result[0], k)
+    return search_question(question, config=config, store=store, embed_fn=embed_fn, k=k)
 
 
 if __name__ == "__main__":

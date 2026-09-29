@@ -69,6 +69,7 @@ def generate(
     config: ProviderConfig,
     client: httpx.Client | None = None,
     on_attempt: Callable[[str, str | None], None] | None = None,
+    temperature: float | None = None,
 ) -> Iterator[str]:
     """Stream tokens from the first chain model that answers.
 
@@ -76,8 +77,10 @@ def generate(
     rate-limited model moves the chain to the next one. ``on_attempt`` is
     called with ``(model, None)`` when a model starts answering and with
     ``(model, reason)`` for each failure, so callers (e.g. the CLI) can show
-    the chain working. If every model fails, a single clean ``GenerationError``
-    summarizing the per-model reasons is raised.
+    the chain working. ``temperature`` lands in the request only when given,
+    keeping plain generation on its original wire shape. If every model fails,
+    a single clean ``GenerationError`` summarizing the per-model reasons is
+    raised.
     """
     own_client = client is None
     client = client or httpx.Client()
@@ -95,6 +98,7 @@ def generate(
                         "model": model,
                         "stream": True,
                         "messages": [{"role": "user", "content": prompt}],
+                        **({"temperature": temperature} if temperature is not None else {}),
                     },
                 ) as response:
                     if response.status_code != 200:

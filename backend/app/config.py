@@ -6,8 +6,9 @@ env-overridable config value. Swapping a model is a .env edit, not a change.
 from __future__ import annotations
 
 import os
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+from typing import TypeVar
 
 from dotenv import load_dotenv
 
@@ -20,6 +21,57 @@ _DEFAULT_LLM_CHAIN = (
     "nvidia/nemotron-3-super-120b-a12b:free",
 )
 _DEFAULT_BASE_URL = "https://openrouter.ai/api/v1"
+
+# Retrieval/generation tuning (spec: top-k = 4 defaults; low temperature).
+# Tuning knobs, not model IDs — still env-overridable so the Eval Set can
+# compare settings without code changes.
+_DEFAULT_TOP_K = 4
+_DEFAULT_TEMPERATURE = 0.2
+
+
+@dataclass(frozen=True)
+class RetrievalConfig:
+    """How a Question is answered: top-k Chunks retrieved, LLM temperature."""
+
+    top_k: int
+    temperature: float
+
+
+_T = TypeVar("_T", bound=float)  # int and float both satisfy this bound
+
+
+def _numeric_setting(
+    name: str, source: Mapping[str, str], default: _T, cast: Callable[[str], _T]
+) -> _T:
+    """One numeric env setting: blank restores the default, garbage is a clean error."""
+    raw = source.get(name, "").strip()
+    if not raw:
+        return default
+    try:
+        return cast(raw)
+    except ValueError:
+        raise ValueError(f"{name} must be a number, got {raw!r}") from None
+
+
+def load_retrieval_config(env: Mapping[str, str] | None = None) -> RetrievalConfig:
+    """Read retrieval settings from ``env`` (defaults to the process environment).
+
+    Mirrors ``load_provider_config``: the production path loads ``backend/.env``
+    first so every entrypoint sees the same values; tests pass ``env=``
+    explicitly and never touch the filesystem. Malformed values raise a clean
+    ``ValueError`` naming the variable — silently falling back would hide a
+    misconfiguration, and ``TOP_K=0`` would refuse every question.
+    """
+    if env is None:
+        load_dotenv()
+    source = os.environ if env is None else env
+    top_k = _numeric_setting("TOP_K", source, _DEFAULT_TOP_K, int)
+    temperature = _numeric_setting("ANSWER_TEMPERATURE", source, _DEFAULT_TEMPERATURE, float)
+    if top_k < 1:
+        raise ValueError(f"TOP_K must be at least 1, got {top_k}")
+    if not 0.0 <= temperature <= 2.0:
+        raise ValueError(f"ANSWER_TEMPERATURE must be between 0 and 2, got {temperature}")
+    return RetrievalConfig(top_k=top_k, temperature=temperature)
 
 
 @dataclass(frozen=True)

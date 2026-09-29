@@ -105,6 +105,28 @@ def test_generate_streams_tokens_from_the_first_chain_model() -> None:
     }
 
 
+def test_generate_sends_temperature_only_when_given() -> None:
+    """An explicit temperature lands in the request body; the default omits it,
+    so plain generation keeps its old wire shape."""
+    captured_with: dict = {}
+    captured_without: dict = {}
+    list(
+        generate(
+            "q", config=TEST_CONFIG, temperature=0.2,
+            client=mock_client(capture_handler(captured_with, sse_response(["ok"]))),
+        )
+    )
+    list(
+        generate(
+            "q", config=TEST_CONFIG,
+            client=mock_client(capture_handler(captured_without, sse_response(["ok"]))),
+        )
+    )
+
+    assert captured_with["body"]["temperature"] == 0.2
+    assert "temperature" not in captured_without["body"]
+
+
 def test_generate_falls_back_to_next_model_when_one_fails() -> None:
     """A rate-limited or missing model moves the chain to the next entry, in order."""
     attempted: list[str] = []
