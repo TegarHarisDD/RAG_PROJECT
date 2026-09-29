@@ -9,6 +9,7 @@ visitors out.
 """
 from __future__ import annotations
 
+import threading
 from collections import defaultdict, deque
 from collections.abc import Callable
 from datetime import date, datetime, timedelta, timezone
@@ -31,42 +32,53 @@ class AbuseLimiter:
         self._per_ip_per_hour = per_ip_per_hour
         self._daily_limit = daily_limit
         self._now = now or (lambda: datetime.now(timezone.utc))
+        # The endpoint runs in FastAPI's threadpool, so the check-and-count
+        # step is guarded — concurrent requests cannot all slip through.
+        self._lock = threading.Lock()
         self._hits_by_ip: dict[str, deque[datetime]] = defaultdict(deque)
         self._day: date | None = None
         self._asked_today = 0
 
-    def check(self, ip: str) -> Rejection | None:
-        """The rejection reason if this Question must not run, else None.
+    def reserve(self, ip: str) -> Rejection | None:
+        """Check this Question against both limits and, when allowed, count it.
 
-        The daily stop is checked first: when the global quota is spent, even a
-        first-time visitor gets the honest "come back tomorrow" rather than a
-        misleading per-IP message.
+        One lock-protected step — check and record together — so concurrent
+        requests from one IP cannot all pass a check-then-record gap. Returns
+        the rejection reason, or None once the slot is reserved. A rejected
+        Question consumes nothing: it never reached a provider, so spending
+        the counters on it would shrink real visitors' headroom.
         """
-        now = self._now()
-        self._roll_day(now)
-        if self._asked_today >= self._daily_limit:
-            return "daily_limit"
+        with self._lock:
+            now = self._now()
+            self._roll_day(now)
+            if self._asked_today >= self._daily_limit:
+                return "daily_limit"
 
-        hits = self._hits_by_ip[ip]
-        cutoff = now - timedelta(hours=1)
-        while hits and hits[0] <= cutoff:
-            hits.popleft()
-        if len(hits) >= self._per_ip_per_hour:
-            return "rate_limit"
-        return None
-
-    def record(self, ip: str) -> None:
-        """Count one accepted Question against the IP's window and the daily stop.
-
-        Called only for questions that passed ``check`` — a rejected ask never
-        reached a provider, so it must not consume quota.
-        """
-        now = self._now()
-        self._roll_day(now)
-        self._asked_today += 1
-        self._hits_by_ip[ip].append(now)
+            cutoff = now - timedelta(hours=1)
+            self._prune_stale_ips(cutoff)
+            hits = self._hits_by_ip[ip]
+            while hits and hits[0] <= cutoff:
+                hits.popleft()
+            if len(hits) >= self._per_ip_per_hour:
+                return "rate_limit"
+            self._asked_today += 1
+            hits.append(now)
+            return None
 
     def _roll_day(self, now: datetime) -> None:
+        """A new UTC day starts with a fresh global counter."""
         if now.date() != self._day:
             self._day = now.date()
             self._asked_today = 0
+
+    def _prune_stale_ips(self, cutoff: datetime) -> None:
+        """Drop IPs whose newest hit is outside the hourly window, so the map
+        stays bounded to the visitors of the last hour — not one entry per IP
+        the process has ever seen."""
+        stale = [
+            ip
+            for ip, hits in self._hits_by_ip.items()
+            if not hits or hits[-1] <= cutoff
+        ]
+        for ip in stale:
+            del self._hits_by_ip[ip]

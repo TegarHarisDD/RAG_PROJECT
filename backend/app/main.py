@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 # Backend configuration lives in .env (see .env.example); secrets never
 # leave this process or get committed.
@@ -75,7 +75,16 @@ QUESTION_MAX_CHARS = _ABUSE.max_question_chars
 class Question(BaseModel):
     """The request body of POST /ask."""
 
-    text: str = Field(min_length=1, max_length=QUESTION_MAX_CHARS)
+    text: str = Field(max_length=QUESTION_MAX_CHARS)
+
+    @field_validator("text")
+    @classmethod
+    def _not_blank(cls, value: str) -> str:
+        """A whitespace-only Question would spend real provider quota on
+        nothing — rejected with the same 422 as an over-length one."""
+        if not value.strip():
+            raise ValueError("Question must contain visible text")
+        return value.strip()
 
 
 # Provider-callable shapes (the seams the tests inject fakes behind).
@@ -93,15 +102,18 @@ def get_retrieval_config() -> RetrievalConfig:
     return load_retrieval_config()
 
 
+@lru_cache(maxsize=1)
+def _make_store() -> ChunkStore:
+    """The process's one Atlas connection. Failures are not cached — a failed
+    cold start retries on the next request."""
+    return AtlasChunkStore.from_env()
+
+
 def get_store_factory() -> Callable[[], ChunkStore]:
     """A store *maker*, not a store: connecting to Atlas can fail, and that
     failure must surface as a clean SSE error event — not a dependency-time
-    500. The one successful connection is cached for the process's lifetime."""
-    @lru_cache(maxsize=1)
-    def make() -> ChunkStore:
-        return AtlasChunkStore.from_env()
-
-    return make
+    500. One successful connection is shared for the process's lifetime."""
+    return _make_store
 
 
 def get_limiter() -> AbuseLimiter:
@@ -172,6 +184,8 @@ def _ask_events(
         yield _sse("error", {"kind": "generation", "message": str(exc)})
     except ProviderError as exc:
         yield _sse("error", {"kind": "provider", "message": str(exc)})
+    except Exception as exc:  # unexpected bug: a terminal event, not silence
+        yield _sse("error", {"kind": "internal", "message": f"Unexpected error: {exc}"})
 
 
 @app.post("/ask")
@@ -192,13 +206,12 @@ def ask_endpoint(
     rejected before the stream starts with an explicit 429 naming the limit.
     """
     ip = _client_ip(request)
-    rejection: Rejection | None = limiter.check(ip)
+    rejection: Rejection | None = limiter.reserve(ip)
     if rejection:
         return JSONResponse(
             status_code=429,
             content={"error": rejection, "message": _ABUSE_MESSAGES[rejection]},
         )
-    limiter.record(ip)  # accepted questions count, even if they fail later
     return StreamingResponse(
         _ask_events(
             question.text,

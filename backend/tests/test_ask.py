@@ -6,7 +6,7 @@ shape, Citations payload, Refusal, abuse limits, error mapping) is verified
 with no network (spec's Testing Decisions).
 """
 import json
-from collections.abc import Callable, Iterator, Mapping, Sequence
+from collections.abc import Iterator, Sequence
 from typing import Any
 
 import pytest
@@ -15,60 +15,19 @@ from fastapi.testclient import TestClient
 import app.main as main
 from app.main import app
 from app.abuse import AbuseLimiter
-from app.config import ProviderConfig, RetrievalConfig
-from app.ingest import IngestError, IngestMeta
+from app.ingest import IngestError
 from app.providers import EmbeddingError, GenerationError
-
-TEST_PROVIDER_CONFIG = ProviderConfig(
-    openrouter_api_key="test-key",
-    openrouter_base_url="https://openrouter.ai/api/v1",
-    embedding_model="test-embedder:free",
-    llm_models=("llm-a:free",),
+from tests.conftest import (
+    TEST_PROVIDER_CONFIG,
+    TEST_RETRIEVAL,
+    FakeStore,
+    fake_generate,
+    hit,
 )
-TEST_RETRIEVAL = RetrievalConfig(top_k=4, temperature=0.2)
-
-
-class FakeStore:
-    """A ChunkStore stand-in: preset search hits, recording the search call."""
-
-    def __init__(self, hits: Sequence[dict[str, object]] | None = None) -> None:
-        self.hits = list(hits or [])
-        self.searched_k: int | None = None
-
-    def state(self) -> tuple[IngestMeta | None, int]:
-        return IngestMeta("test-embedder:free", 1024), 10
-
-    def reset(self) -> None: ...
-
-    def replace_documents(self, docs: Sequence[Mapping[str, object]]) -> None: ...
-
-    def ensure_index(self, definition: Mapping[str, object]) -> None: ...
-
-    def search(self, vector: Sequence[float], k: int) -> list[dict[str, object]]:
-        self.searched_k = k
-        return list(self.hits)
-
-
-def hit(index: int, text: str) -> dict[str, object]:
-    """A store hit in the shape AtlasChunkStore.search projects."""
-    return {
-        "text": text,
-        "source": "eu-ai-act.pdf",
-        "page": 12 + index,
-        "chunk_index": index,
-        "score": 0.9 - index / 10,
-    }
 
 
 def fake_embed(texts: Sequence[str], *, config: object) -> list[list[float]]:
     return [[0.1] for _ in texts]
-
-
-def fake_generate(tokens: Sequence[str]) -> Callable[..., Iterator[str]]:
-    def generate_fn(prompt: str, **kwargs: object) -> Iterator[str]:
-        yield from tokens
-
-    return generate_fn
 
 
 def sse_events(body: str) -> list[tuple[str, dict[str, Any]]]:
@@ -99,7 +58,7 @@ def client() -> Iterator[TestClient]:
     app.dependency_overrides[main.get_provider_config] = lambda: TEST_PROVIDER_CONFIG
     app.dependency_overrides[main.get_retrieval_config] = lambda: TEST_RETRIEVAL
     app.dependency_overrides[main.get_embed_fn] = lambda: fake_embed
-    app.dependency_overrides[main.get_generate_fn] = lambda: fake_generate(["The ", "answer"])
+    app.dependency_overrides[main.get_generate_fn] = lambda: fake_generate([["The ", "answer"]])
     # Created once: the dependency override runs per request, and a fresh
     # limiter per request would remember nothing.
     limiter = AbuseLimiter(per_ip_per_hour=5, daily_limit=40)
@@ -155,7 +114,7 @@ class TestStreamingContract:
         """Nothing retrieved: a refusal event the UI can render distinctly —
         no token events, no citations payload, and no LLM call spent."""
         app.dependency_overrides[main.get_store_factory] = lambda: (lambda: FakeStore())
-        generate_fn = fake_generate(["should never be reached"])
+        generate_fn = fake_generate([["should never be reached"]])
         app.dependency_overrides[main.get_generate_fn] = lambda: generate_fn
 
         response = ask(client, "What is the capital of France?")
@@ -170,6 +129,13 @@ class TestAbuseLimits:
     def test_questions_over_the_length_cap_are_rejected(self, client: TestClient) -> None:
         """A 501-character Question fails validation with an explicit 422."""
         response = ask(client, "x" * 501)
+
+        assert response.status_code == 422
+
+    def test_blank_questions_are_rejected(self, client: TestClient) -> None:
+        """A whitespace-only Question would spend real provider quota on
+        nothing — rejected with the same explicit 422."""
+        response = ask(client, "   ")
 
         assert response.status_code == 422
 
@@ -249,3 +215,22 @@ class TestErrorMapping:
             ("error", {"kind": "store",
                        "message": "Could not reach the Atlas cluster: ServerSelectionTimeoutError"})
         ]
+
+    def test_unexpected_bugs_still_get_a_terminal_error_event(self, client: TestClient) -> None:
+        """An exception outside the mapped families (a malformed store hit, a
+        code bug) must not drop the SSE connection silently — a terminal
+        ``internal`` error event ends the stream instead."""
+        def broken_search(vector: Sequence[float], k: int) -> list[dict[str, object]]:
+            raise KeyError("source")  # a malformed hit, as if the store were corrupt
+
+        store = FakeStore()
+        store.search = broken_search  # type: ignore[method-assign]
+        app.dependency_overrides[main.get_store_factory] = lambda: (lambda: store)
+
+        response = ask(client)
+
+        (event,) = sse_events(response.text)
+        name, data = event
+        assert name == "error"
+        assert data["kind"] == "internal"
+        assert "source" in data["message"]

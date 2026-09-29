@@ -2,6 +2,7 @@
 
 The limiter is pure logic against an injected clock, so window expiry and the
 UTC-day rollover are tested deterministically — no sleeps, no wall clock.
+``reserve`` is the single atomic check-and-count step the /ask endpoint calls.
 """
 from datetime import datetime, timedelta, timezone
 
@@ -28,15 +29,14 @@ def limiter(clock: Clock, *, per_ip: int = 5, daily: int = 40) -> AbuseLimiter:
 
 
 def test_allows_exactly_five_questions_per_ip_then_rejects() -> None:
-    """Questions 1-5 pass the check; the 6th inside the hour is rejected."""
+    """Questions 1-5 reserve a slot; the 6th inside the hour is rejected."""
     clock = Clock()
     guard = limiter(clock)
 
     for _ in range(5):
-        assert guard.check("1.2.3.4") is None
-        guard.record("1.2.3.4")
+        assert guard.reserve("1.2.3.4") is None
 
-    assert guard.check("1.2.3.4") == "rate_limit"
+    assert guard.reserve("1.2.3.4") == "rate_limit"
 
 
 def test_hourly_hits_age_out_after_an_hour() -> None:
@@ -44,11 +44,11 @@ def test_hourly_hits_age_out_after_an_hour() -> None:
     clock = Clock()
     guard = limiter(clock)
     for _ in range(5):
-        guard.record("1.2.3.4")
+        guard.reserve("1.2.3.4")
 
     clock.advance(minutes=61)
 
-    assert guard.check("1.2.3.4") is None
+    assert guard.reserve("1.2.3.4") is None
 
 
 def test_ips_are_limited_independently() -> None:
@@ -56,9 +56,9 @@ def test_ips_are_limited_independently() -> None:
     clock = Clock()
     guard = limiter(clock)
     for _ in range(5):
-        guard.record("1.2.3.4")
+        guard.reserve("1.2.3.4")
 
-    assert guard.check("5.6.7.8") is None
+    assert guard.reserve("5.6.7.8") is None
 
 
 def test_daily_stop_rejects_everyone_regardless_of_ip() -> None:
@@ -68,36 +68,46 @@ def test_daily_stop_rejects_everyone_regardless_of_ip() -> None:
     clock = Clock()
     guard = limiter(clock, daily=3)
     for ip in ("1.2.3.4", "1.2.3.4", "5.6.7.8"):
-        assert guard.check(ip) is None
-        guard.record(ip)
+        assert guard.reserve(ip) is None
 
-    assert guard.check("9.9.9.9") == "daily_limit"
-    assert guard.check("1.2.3.4") == "daily_limit"
+    assert guard.reserve("9.9.9.9") == "daily_limit"
+    assert guard.reserve("1.2.3.4") == "daily_limit"
 
 
 def test_daily_counter_resets_at_utc_midnight() -> None:
     """A new UTC day starts with a fresh global counter."""
     clock = Clock()
     guard = limiter(clock, daily=1)
-    assert guard.check("1.2.3.4") is None
-    guard.record("1.2.3.4")
-    assert guard.check("1.2.3.4") == "daily_limit"
+    assert guard.reserve("1.2.3.4") is None
+    assert guard.reserve("1.2.3.4") == "daily_limit"
 
     clock.advance(days=1)
 
-    assert guard.check("1.2.3.4") is None
+    assert guard.reserve("1.2.3.4") is None
 
 
 def test_rejected_questions_do_not_consume_quota() -> None:
-    """A rejected ask records nothing: it never reached a provider, so spending
-    the counters on it would shrink real visitors' headroom."""
+    """A rejected reserve records nothing: it never reached a provider, so
+    spending the daily counter on it would shrink real visitors' headroom."""
     clock = Clock()
     guard = limiter(clock, per_ip=1, daily=3)
 
-    assert guard.check("1.2.3.4") is None
-    guard.record("1.2.3.4")
-    # Rejected (over the per-IP window) and never recorded.
-    assert guard.check("1.2.3.4") == "rate_limit"
-    clock.advance(minutes=10)
-    guard.record("5.6.7.8")  # only the two accepted questions count today
-    assert guard.check("9.9.9.9") is None
+    assert guard.reserve("1.2.3.4") is None  # 1 of 3 today
+    assert guard.reserve("1.2.3.4") == "rate_limit"  # rejected, not counted
+    assert guard.reserve("5.6.7.8") is None  # 2 of 3 today
+    assert guard.reserve("9.9.9.9") is None  # 3 of 3 today
+    assert guard.reserve("8.8.8.8") == "daily_limit"
+
+
+def test_stale_ips_are_pruned_so_the_map_stays_bounded() -> None:
+    """A visitor who never returns must not leave an entry behind forever:
+    once their newest hit leaves the hourly window, the entry is dropped."""
+    clock = Clock()
+    guard = limiter(clock)
+    guard.reserve("1.2.3.4")
+
+    clock.advance(minutes=61)
+    guard.reserve("5.6.7.8")
+
+    assert "1.2.3.4" not in guard._hits_by_ip  # internals: pruning is invisible
+    assert "5.6.7.8" in guard._hits_by_ip
