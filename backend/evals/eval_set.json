@@ -1,0 +1,569 @@
+{
+  "description": "Draft Eval Set for the EU AI Act corpus (Regulation (EU) 2024/1689, annexes excluded). ~40 in-scope Questions with expected keywords and citation pages, 10 out-of-scope Questions that must produce a Refusal. Pages refer to the ingested PDF's page numbers. Drafted for owner review; final wording stays with the owner.",
+  "questions": [
+    {
+      "id": "purpose",
+      "question": "What is the purpose of the EU AI Act?",
+      "expects_refusal": false,
+      "keywords": [
+        "internal market",
+        "trustworthy"
+      ],
+      "pages": [
+        44
+      ]
+    },
+    {
+      "id": "ai-system-definition",
+      "question": "How does the AI Act define an AI system?",
+      "expects_refusal": false,
+      "keywords": [
+        "machine-based system",
+        "autonomy"
+      ],
+      "pages": [
+        46
+      ]
+    },
+    {
+      "id": "provider-definition",
+      "question": "Who counts as a provider of an AI system under the AI Act?",
+      "expects_refusal": false,
+      "keywords": [
+        "develops",
+        "own name"
+      ],
+      "pages": [
+        46
+      ]
+    },
+    {
+      "id": "deployer-definition",
+      "question": "Who counts as a deployer of an AI system under the AI Act?",
+      "expects_refusal": false,
+      "keywords": [
+        "ai system under its authority",
+        "authority"
+      ],
+      "pages": [
+        46
+      ]
+    },
+    {
+      "id": "deep-fake-definition",
+      "question": "How does the AI Act define a deep fake?",
+      "expects_refusal": false,
+      "keywords": [
+        "ai-generated or manipulated",
+        "authentic"
+      ],
+      "pages": [
+        50
+      ]
+    },
+    {
+      "id": "gpai-model-definition",
+      "question": "What is a general-purpose AI model according to the AI Act?",
+      "expects_refusal": false,
+      "keywords": [
+        "self-supervision",
+        "wide range of distinct tasks"
+      ],
+      "pages": [
+        26,
+        50
+      ]
+    },
+    {
+      "id": "ai-literacy",
+      "question": "What does the AI Act require providers and deployers to do about AI literacy?",
+      "expects_refusal": false,
+      "keywords": [
+        "ai literacy"
+      ],
+      "pages": [
+        6,
+        50
+      ]
+    },
+    {
+      "id": "prohibited-overview",
+      "question": "Which AI practices does the AI Act prohibit?",
+      "expects_refusal": false,
+      "keywords": [
+        "subliminal",
+        "social scoring"
+      ],
+      "pages": [
+        51
+      ]
+    },
+    {
+      "id": "manipulation-prohibition",
+      "question": "Does the AI Act prohibit AI systems that use subliminal techniques to manipulate behaviour?",
+      "expects_refusal": false,
+      "keywords": [
+        "subliminal",
+        "significant harm"
+      ],
+      "pages": [
+        51,
+        8
+      ]
+    },
+    {
+      "id": "vulnerable-exploitation",
+      "question": "Does the AI Act prohibit exploiting vulnerabilities of people due to age or disability?",
+      "expects_refusal": false,
+      "keywords": [
+        "vulnerabilities",
+        "disability"
+      ],
+      "pages": [
+        51
+      ]
+    },
+    {
+      "id": "social-scoring",
+      "question": "Is social scoring of natural persons allowed under the AI Act?",
+      "expects_refusal": false,
+      "keywords": [
+        "social scoring",
+        "prohibited"
+      ],
+      "pages": [
+        51,
+        9
+      ]
+    },
+    {
+      "id": "facial-scraping",
+      "question": "Does the AI Act prohibit scraping facial images from the internet to build facial recognition databases?",
+      "expects_refusal": false,
+      "keywords": [
+        "facial recognition databases",
+        "untargeted scraping"
+      ],
+      "pages": [
+        51,
+        12
+      ]
+    },
+    {
+      "id": "emotion-workplace",
+      "question": "Does the AI Act prohibit emotion recognition systems in workplaces and education institutions?",
+      "expects_refusal": false,
+      "keywords": [
+        "emotional state",
+        "workplace",
+        "education"
+      ],
+      "pages": [
+        12,
+        51
+      ]
+    },
+    {
+      "id": "biometric-categorisation",
+      "question": "Is biometric categorisation that infers race or sexual orientation prohibited under the AI Act?",
+      "expects_refusal": false,
+      "keywords": [
+        "biometric categorisation",
+        "sexual orientation"
+      ],
+      "pages": [
+        51
+      ]
+    },
+    {
+      "id": "high-risk-classification",
+      "question": "When is an AI system classified as high-risk under the AI Act?",
+      "expects_refusal": false,
+      "keywords": [
+        "safety component",
+        "conformity assessment"
+      ],
+      "pages": [
+        53
+      ]
+    },
+    {
+      "id": "profiling-high-risk",
+      "question": "Does profiling of natural persons make an AI system always high-risk?",
+      "expects_refusal": false,
+      "keywords": [
+        "profiling",
+        "high-risk"
+      ],
+      "pages": [
+        16,
+        17,
+        53
+      ]
+    },
+    {
+      "id": "risk-management",
+      "question": "What kind of process must the risk management system for a high-risk AI system be?",
+      "expects_refusal": false,
+      "keywords": [
+        "continuous iterative process",
+        "lifecycle"
+      ],
+      "pages": [
+        56
+      ]
+    },
+    {
+      "id": "data-governance",
+      "question": "What data governance practices must providers follow for training, validation and testing data sets?",
+      "expects_refusal": false,
+      "keywords": [
+        "training, validation and testing",
+        "biases"
+      ],
+      "pages": [
+        57
+      ]
+    },
+    {
+      "id": "bias-special-data",
+      "question": "May providers process special categories of personal data to detect and correct bias?",
+      "expects_refusal": false,
+      "keywords": [
+        "special categories",
+        "bias"
+      ],
+      "pages": [
+        57,
+        58
+      ]
+    },
+    {
+      "id": "technical-documentation",
+      "question": "What must the technical documentation of a high-risk AI system contain?",
+      "expects_refusal": false,
+      "keywords": [
+        "annex iv",
+        "technical documentation"
+      ],
+      "pages": [
+        58
+      ]
+    },
+    {
+      "id": "log-retention",
+      "question": "How long must providers keep the logs automatically generated by a high-risk AI system?",
+      "expects_refusal": false,
+      "keywords": [
+        "six months"
+      ],
+      "pages": [
+        64
+      ]
+    },
+    {
+      "id": "human-oversight",
+      "question": "What is the human oversight requirement for high-risk AI systems?",
+      "expects_refusal": false,
+      "keywords": [
+        "natural persons",
+        "oversight"
+      ],
+      "pages": [
+        60
+      ]
+    },
+    {
+      "id": "accuracy-robustness",
+      "question": "What accuracy, robustness and cybersecurity requirements apply to high-risk AI systems?",
+      "expects_refusal": false,
+      "keywords": [
+        "accuracy",
+        "robustness",
+        "cybersecurity"
+      ],
+      "pages": [
+        60,
+        61
+      ]
+    },
+    {
+      "id": "adversarial-attacks",
+      "question": "How must high-risk AI systems resist attacks like data poisoning or adversarial examples?",
+      "expects_refusal": false,
+      "keywords": [
+        "data poisoning",
+        "adversarial"
+      ],
+      "pages": [
+        61
+      ]
+    },
+    {
+      "id": "corrective-actions",
+      "question": "What must a provider do when a high-risk AI system it placed on the market turns out to be non-compliant?",
+      "expects_refusal": false,
+      "keywords": [
+        "corrective actions",
+        "recall"
+      ],
+      "pages": [
+        64
+      ]
+    },
+    {
+      "id": "authorised-representative",
+      "question": "When must a provider established outside the EU appoint an authorised representative?",
+      "expects_refusal": false,
+      "keywords": [
+        "written mandate",
+        "union"
+      ],
+      "pages": [
+        64
+      ]
+    },
+    {
+      "id": "deployer-obligations",
+      "question": "What are the main obligations of deployers of high-risk AI systems?",
+      "expects_refusal": false,
+      "keywords": [
+        "instructions for use",
+        "human oversight"
+      ],
+      "pages": [
+        67
+      ]
+    },
+    {
+      "id": "fria",
+      "question": "Who must perform a fundamental rights impact assessment before deploying a high-risk AI system?",
+      "expects_refusal": false,
+      "keywords": [
+        "public law",
+        "public services"
+      ],
+      "pages": [
+        69
+      ]
+    },
+    {
+      "id": "transparency-chatbot",
+      "question": "Must people be told that they are interacting with an AI chatbot?",
+      "expects_refusal": false,
+      "keywords": [
+        "informed",
+        "interacting"
+      ],
+      "pages": [
+        31,
+        33,
+        82
+      ]
+    },
+    {
+      "id": "synthetic-marking",
+      "question": "Must AI-generated synthetic audio, image or video content be marked as artificially generated?",
+      "expects_refusal": false,
+      "keywords": [
+        "machine-readable",
+        "artificially generated"
+      ],
+      "pages": [
+        82
+      ]
+    },
+    {
+      "id": "deepfake-disclosure",
+      "question": "What must deployers disclose when they publish AI-generated deep fakes?",
+      "expects_refusal": false,
+      "keywords": [
+        "disclose",
+        "manipulated"
+      ],
+      "pages": [
+        82
+      ]
+    },
+    {
+      "id": "gpai-systemic",
+      "question": "When is a general-purpose AI model classified as a model with systemic risk?",
+      "expects_refusal": false,
+      "keywords": [
+        "high impact capabilities",
+        "floating point operations"
+      ],
+      "pages": [
+        83
+      ]
+    },
+    {
+      "id": "gpai-obligations",
+      "question": "What obligations do providers of general-purpose AI models have under the AI Act?",
+      "expects_refusal": false,
+      "keywords": [
+        "technical documentation",
+        "copyright",
+        "training"
+      ],
+      "pages": [
+        84
+      ]
+    },
+    {
+      "id": "codes-of-practice",
+      "question": "By what date must the codes of practice for general-purpose AI providers be ready?",
+      "expects_refusal": false,
+      "keywords": [
+        "2 May 2025"
+      ],
+      "pages": [
+        87
+      ]
+    },
+    {
+      "id": "sandboxes",
+      "question": "Must Member States establish AI regulatory sandboxes?",
+      "expects_refusal": false,
+      "keywords": [
+        "sandbox",
+        "member states"
+      ],
+      "pages": [
+        87,
+        88
+      ]
+    },
+    {
+      "id": "eu-database",
+      "question": "What is the EU database for high-risk AI systems and who maintains it?",
+      "expects_refusal": false,
+      "keywords": [
+        "commission",
+        "high-risk"
+      ],
+      "pages": [
+        100
+      ]
+    },
+    {
+      "id": "serious-incident",
+      "question": "How quickly must a provider report a serious incident involving a high-risk AI system?",
+      "expects_refusal": false,
+      "keywords": [
+        "15 days"
+      ],
+      "pages": [
+        101
+      ]
+    },
+    {
+      "id": "penalties-prohibited",
+      "question": "What is the maximum fine for violating the AI Act's prohibited AI practices?",
+      "expects_refusal": false,
+      "keywords": [
+        "35 000 000",
+        "whichever is higher"
+      ],
+      "pages": [
+        115
+      ]
+    },
+    {
+      "id": "entry-into-force",
+      "question": "When did the AI Act enter into force and from what date does it apply?",
+      "expects_refusal": false,
+      "keywords": [
+        "twentieth day",
+        "2 August 2026"
+      ],
+      "pages": [
+        123
+      ]
+    },
+    {
+      "id": "phased-dates",
+      "question": "Which parts of the AI Act apply before 2 August 2026, and from when?",
+      "expects_refusal": false,
+      "keywords": [
+        "2 February 2025",
+        "2 August 2025"
+      ],
+      "pages": [
+        44,
+        123
+      ]
+    },
+    {
+      "id": "capital-of-australia",
+      "question": "What is the capital of Australia?",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": []
+    },
+    {
+      "id": "sourdough-starter",
+      "question": "How do I make a sourdough starter at home?",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": []
+    },
+    {
+      "id": "euro-2024-final",
+      "question": "Who won the final of UEFA Euro 2024?",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": []
+    },
+    {
+      "id": "ml-framework",
+      "question": "Which machine learning framework should I learn first as a beginner?",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": []
+    },
+    {
+      "id": "gdpr-cookies",
+      "question": "How are GDPR cookie-consent fines calculated?",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": []
+    },
+    {
+      "id": "brussels-weather",
+      "question": "What will the weather be like in Brussels tomorrow?",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": []
+    },
+    {
+      "id": "ai-haiku",
+      "question": "Write a haiku about artificial intelligence.",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": []
+    },
+    {
+      "id": "quantum-computing",
+      "question": "Explain how a quantum computer works.",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": []
+    },
+    {
+      "id": "us-comparison",
+      "question": "How does the United States' approach to AI regulation differ from the EU AI Act?",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": []
+    },
+    {
+      "id": "annex-iii-list",
+      "question": "List all the areas of AI systems that Annex III of the AI Act classifies as high-risk.",
+      "expects_refusal": true,
+      "keywords": [],
+      "pages": [],
+      "note": "Deliberate boundary case: the annexes are excluded from the Corpus by design (spec), so the correct behaviour is a Refusal even though the regulation body references Annex III throughout."
+    }
+  ]
+}

@@ -1,0 +1,966 @@
+{
+  "purpose": {
+    "input_hash": "e6cb72940e0d3f05638b5bd3845920a760b4875dede118440bffeddbaf057164",
+    "status": "ok",
+    "verdict": {
+      "question_id": "purpose",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        44,
+        1,
+        45,
+        2
+      ],
+      "answer_text": "The EU AI Act’s purpose is to improve the functioning of the internal market and promote the uptake of human-centric and trustworthy AI, while ensuring a high level of protection of health, safety, and fundamental rights—including democracy, the rule of law, and environmental protection—against harmful effects of AI systems in the Union, and supporting innovation (eu-ai-act.pdf, p. 44).\n\nIt also lays down a uniform legal framework for the development, placing on the market, putting into service, and use of AI systems in the Union (eu-ai-act.pdf, p. 1)."
+    }
+  },
+  "ai-system-definition": {
+    "input_hash": "110b5f8167646bf3abbff1d7bffbb1b7c894f1617e14ad8343f9674cc3e0dcf2",
+    "status": "ok",
+    "verdict": {
+      "question_id": "ai-system-definition",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        46,
+        46,
+        4,
+        14
+      ],
+      "answer_text": "The AI Act defines an AI system as “a machine‑based system that is designed to operate with varying levels of autonomy and that may exhibit adaptiveness after deployment, and that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations, or decisions that can influence physical or virtual environments” (eu‑ai‑act.pdf, p. 46)."
+    }
+  },
+  "provider-definition": {
+    "input_hash": "33e2ccf8de6ce4d42bd1c80502dd5ab41f91b8edbec002b474969fb76ed47352",
+    "status": "ok",
+    "verdict": {
+      "question_id": "provider-definition",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        46,
+        24,
+        66,
+        64
+      ],
+      "answer_text": "Under the AI Act, a “provider” is a natural or legal person, public authority, agency or other body that **develops an AI system or a general‑purpose AI model, or has such a system/model developed and places it on the market or puts it into service under its own name or trademark** (whether for payment or free of charge)【eu-ai-act.pdf, p.46】.  \n\nIn addition, for high‑risk AI systems, **any distributor, importer, deployer or other third‑party shall be considered a provider** when they:  \n\n- put their name or trademark on a high‑risk AI system already placed on the market or put into service;  \n- make a substantial modification to a high‑risk AI system that remains high‑risk after the modification; or  \n- modify the intended purpose of a high‑risk AI system in a way that keeps it high‑risk【eu-ai-act.pdf, p.66】.  \n\nThese are the persons/entities that count as providers under the AI Act."
+    }
+  },
+  "deployer-definition": {
+    "input_hash": "0238c528238b8a28e60108ef5b6c7bbeb3482a9fb368b563d3145fa3bfb5d211",
+    "status": "ok",
+    "verdict": {
+      "question_id": "deployer-definition",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        46,
+        66,
+        67,
+        4
+      ],
+      "answer_text": "A deployer under the AI Act is any natural or legal person, public authority, agency or other body that uses an AI system under its authority, except when the AI system is used in the course of a personal non‑professional activity (eu-ai-act.pdf, p.46; eu-ai-act.pdf, p.4)."
+    }
+  },
+  "deep-fake-definition": {
+    "input_hash": "4e65f2e39d8a8fb93b1e4051ab35c70886e7699f881cb5e3aaffe3b24392c46f",
+    "status": "ok",
+    "verdict": {
+      "question_id": "deep-fake-definition",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        82,
+        50,
+        34,
+        46
+      ],
+      "answer_text": "The AI Act defines a deep fake as “AI‑generated or manipulated image, audio or video content that resembles existing persons, objects, places, entities or events and would falsely appear to a person to be authentic or truthful.” (eu-ai-act.pdf, p. 50)"
+    }
+  },
+  "gpai-model-definition": {
+    "input_hash": "ce23c20b68c14e9de6553a711fcd06bc2e061a39fce310a82ad7de4f84bffd9d",
+    "status": "ok",
+    "verdict": {
+      "question_id": "gpai-model-definition",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        26,
+        26,
+        27,
+        26
+      ],
+      "answer_text": "A general‑purpose AI model is defined by its key functional characteristics of **generality** and the **capability to competently perform a wide range of distinct tasks**. These models are typically trained on large amounts of data using methods such as self‑supervised, unsupervised or reinforcement learning. Models that have **at least a billion parameters** and are trained with a large amount of data using self‑supervision at scale are considered to display significant generality and to competently perform a wide range of distinctive tasks. Large generative AI models (which can flexibly generate text, audio, images or video) are a typical example of a general‑purpose AI model.  \n\nSources:  \n- Definition based on generality and capability to perform a wide range of distinct tasks (eu‑ai‑act.pdf, p. 26).  \n- Training on large amounts of data via self‑supervised, unsupervised or reinforcement learning (eu‑ai‑act.pdf, p. 26).  \n- Models with ≥ 1 billion parameters trained with large data using self‑supervision at scale display significant generality and wide‑task competence (eu‑ai‑act.pdf, p. 26).  \n- Large generative AI models as a typical example (eu‑ai‑act.pdf, p. 26)."
+    }
+  },
+  "ai-literacy": {
+    "input_hash": "07df13c35fc8284cf30703272ef590b9eb41ae0f8ae8240b6a211650ba3499af",
+    "status": "ok",
+    "verdict": {
+      "question_id": "ai-literacy",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        6,
+        82,
+        24,
+        6
+      ],
+      "answer_text": "The AI Act requires providers and deployers to ensure that they and the persons involved in the development, operation and use of AI systems have sufficient AI literacy so they can make informed decisions, achieve appropriate compliance and enforce the regulation correctly. Specifically, AI literacy should equip providers, deployers and affected persons with the necessary notions to understand AI systems, their outputs and the impact of AI‑assisted decisions, and should provide all relevant actors in the AI value chain with the insights needed to ensure proper compliance and enforcement. The Act also calls for the promotion of AI literacy tools, public awareness and understanding of AI’s benefits, risks, safeguards, rights and obligations, and for facilitating the drawing up of voluntary codes of conduct to advance AI literacy among those dealing with AI (eu-ai-act.pdf, p.6)【1†L1-L4】【4†L1-L4】."
+    }
+  },
+  "prohibited-overview": {
+    "input_hash": "471ded60ef4f04b20cba0fa0ddae09428b9468c5f73dd6469c1571de7b03b919",
+    "status": "ok",
+    "verdict": {
+      "question_id": "prohibited-overview",
+      "expects_refusal": false,
+      "passed": false,
+      "refused": false,
+      "missing_keywords": [
+        "social scoring"
+      ],
+      "page_match": true,
+      "cited_pages": [
+        51,
+        6,
+        46,
+        82
+      ],
+      "answer_text": "According to the provided excerpt of Article 5, the AI Act prohibits:\n\n- Placing on the market, putting into service, or using an AI system that deploys subliminal techniques beyond a person’s consciousness, or purposefully manipulative or deceptive techniques, materially distorting a person’s or group’s behaviour and causing significant harm (eu-ai-act.pdf, p. 51).\n- Placing on the market, putting into service, or using an AI system that exploits vulnerabilities of a natural person or group due to age, disability, or a specific social or economic situation, materially distorting behaviour and causing significant harm (eu-ai-act.pdf, p. 51).\n\nThe excerpt also begins a third prohibited practice at item (c), but the text is cut off, so the remaining prohibited practices are not available in the provided excerpts."
+    }
+  },
+  "manipulation-prohibition": {
+    "input_hash": "6ac9a4cd1bd39aea2efca56243e98d5b358601313e94344401e1a4b46a7726ee",
+    "status": "ok",
+    "verdict": {
+      "question_id": "manipulation-prohibition",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        8,
+        51,
+        12,
+        46
+      ],
+      "answer_text": "Yes. The AI Act prohibits the placing on the market, putting into service, or use of an AI system that deploys “subliminal techniques beyond a person’s consciousness” or purposefully manipulative or deceptive techniques, where this has the objective or effect of materially distorting a person’s or group’s behaviour by appreciably impairing their ability to make an informed decision, causing them to take a decision they would not otherwise have taken, and causing or being reasonably likely to cause significant harm. (eu-ai-act.pdf, p. 51)\n\nThe recitals also state that AI systems using subliminal components or manipulative/deceptive techniques that subvert or impair autonomy, decision-making, or free choice are particularly dangerous and should be prohibited. (eu-ai-act.pdf, p. 8)"
+    }
+  },
+  "vulnerable-exploitation": {
+    "input_hash": "8f8ac1294c1ff04c7be2be9d95d01024392c5eb75529fdecb25e47f9da274980",
+    "status": "ok",
+    "verdict": {
+      "question_id": "vulnerable-exploitation",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        33,
+        8,
+        55,
+        51
+      ],
+      "answer_text": "Yes. The AI Act prohibits the placing on the market, putting into service, or use of an AI system that exploits the vulnerabilities of a natural person or a specific group of persons due to their age, disability, or a specific social or economic situation, where this materially distorts their behaviour and causes or is reasonably likely to cause significant harm. (eu-ai-act.pdf, p. 51). The recitals also state that such AI systems “should therefore be prohibited.” (eu-ai-act.pdf, p. 8)."
+    }
+  },
+  "social-scoring": {
+    "input_hash": "81c2703b7eeb9a0e323391d9008f14272afff163378a51d8dcce494ff52d57ed",
+    "status": "ok",
+    "verdict": {
+      "question_id": "social-scoring",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        9,
+        16,
+        33,
+        51
+      ],
+      "answer_text": "No. Under the AI Act, AI systems that evaluate or classify natural persons or groups over time based on social behaviour or known, inferred, or predicted personal or personality characteristics are prohibited where the resulting social score leads to:\n\n- detrimental or unfavourable treatment in social contexts unrelated to where the data was generated or collected; or  \n- detrimental or unfavourable treatment that is unjustified or disproportionate to the social behaviour or its gravity.  \n(eu-ai-act.pdf, p. 51)\n\nThe Act also states that such unacceptable social scoring practices “should therefore be prohibited,” although this prohibition should not affect lawful evaluation practices carried out for a specific purpose in accordance with Union and national law. (eu-ai-act.pdf, p. 9)"
+    }
+  },
+  "facial-scraping": {
+    "input_hash": "cdc97521388d959cdb0f641fa241f2bc6ec5c2db26daf1f19f7a14468b23575c",
+    "status": "ok",
+    "verdict": {
+      "question_id": "facial-scraping",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        51,
+        12,
+        12,
+        2
+      ],
+      "answer_text": "Yes. The AI Act prohibits the placing on the market, putting into service, or use of AI systems that create or expand facial recognition databases through the untargeted scraping of facial images from the internet or CCTV footage (eu-ai-act.pdf, p. 51). The recitals state this practice should be prohibited because it contributes to mass surveillance and can lead to fundamental-rights violations, including privacy (eu-ai-act.pdf, p. 12)."
+    }
+  },
+  "emotion-workplace": {
+    "input_hash": "76a834c3f3849c8b91208d5b4790f07949b72109c8fc0138612512e465954860",
+    "status": "ok",
+    "verdict": {
+      "question_id": "emotion-workplace",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        12,
+        82,
+        18,
+        46
+      ],
+      "answer_text": "Yes. The AI Act prohibits the placing on the market, putting into service, or use of AI systems intended to detect the emotional state of individuals in workplace and education situations, with an exception for systems placed on the market strictly for medical or safety reasons, such as therapeutic use. (eu-ai-act.pdf, p. 12)"
+    }
+  },
+  "biometric-categorisation": {
+    "input_hash": "a0c325fcd3bce66e896ab09509135a9f5d366fcfd4869e95317272d207f639f9",
+    "status": "ok",
+    "verdict": {
+      "question_id": "biometric-categorisation",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        9,
+        51,
+        15,
+        4
+      ],
+      "answer_text": "Yes. The AI Act prohibits the placing on the market, putting into service, or use of biometric categorisation systems that categorise natural persons based on biometric data to deduce or infer their race or sexual orientation (eu-ai-act.pdf, p. 51). This is also stated in the recitals, which say such biometric categorisation systems “should be prohibited” (eu-ai-act.pdf, p. 9).\n\nThe prohibition does not cover lawful labelling, filtering, or categorisation of lawfully acquired biometric datasets, for example in law enforcement (eu-ai-act.pdf, p. 51; eu-ai-act.pdf, p. 9)."
+    }
+  },
+  "high-risk-classification": {
+    "input_hash": "a2aa8dbb7c1922ca886d157625b33d27c3006c3b0013ce7789682dc5de0b46d8",
+    "status": "ok",
+    "verdict": {
+      "question_id": "high-risk-classification",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        53,
+        53,
+        55,
+        107
+      ],
+      "answer_text": "An AI system is classified as high-risk under the AI Act in the following cases:\n\n- It is intended to be used as a safety component of a product, or is itself a product, covered by Union harmonisation legislation listed in Annex I, **and** that product or AI system must undergo a third-party conformity assessment before being placed on the market or put into service (eu-ai-act.pdf, p. 53).\n- It is an AI system referred to in Annex III (eu-ai-act.pdf, p. 53).\n\nHowever, an Annex III AI system is **not** considered high-risk where it does not pose a significant risk of harm to health, safety, or fundamental rights, including by not materially influencing the outcome of decision-making, and it meets one of the listed narrow-task conditions (eu-ai-act.pdf, p. 53). Despite that exception, an Annex III AI system is **always** high-risk where it performs profiling of natural persons (eu-ai-act.pdf, p. 53)."
+    }
+  },
+  "profiling-high-risk": {
+    "input_hash": "ab83718da7ec7440f3e2a2cd61353bae5964e6672a6f66d2ea62df6bf232f69e",
+    "status": "ok",
+    "verdict": {
+      "question_id": "profiling-high-risk",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        12,
+        33,
+        16,
+        17
+      ],
+      "answer_text": "No. Profiling of natural persons does not make an AI system always high-risk.\n\n- Some profiling-related uses are high-risk: AI systems used to evaluate the credit score or creditworthiness of natural persons should be classified as high-risk (eu-ai-act.pdf, p. 16).\n- But not all such systems are high-risk: AI systems specifically intended for administrative proceedings by tax and customs authorities, and by financial intelligence units carrying out administrative tasks analysing information under Union anti-money laundering law, should not be classified as high-risk (eu-ai-act.pdf, p. 17)."
+    }
+  },
+  "risk-management": {
+    "input_hash": "f17c5db1050a0c38d48d6e2d759e04bde7e90e4fce7a321126d9c6cc5e624436",
+    "status": "ok",
+    "verdict": {
+      "question_id": "risk-management",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        56,
+        19,
+        20,
+        56
+      ],
+      "answer_text": "It must be a continuous iterative process, planned and run throughout the entire lifecycle of the high-risk AI system, and it requires regular systematic review and updating (eu-ai-act.pdf, p. 56)."
+    }
+  },
+  "data-governance": {
+    "input_hash": "bb169eac1637e1acae8d7757f6d146fe8bdb64b13a0577d41c760375eff47342",
+    "status": "ok",
+    "verdict": {
+      "question_id": "data-governance",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        57,
+        19,
+        57,
+        19
+      ],
+      "answer_text": "Providers must ensure that training, validation and testing data sets are subject to data governance and management practices appropriate for the intended purpose of the high-risk AI system, whenever such data sets are used (eu-ai-act.pdf, p. 57). Those practices must concern in particular:\n\n- the relevant design choices (eu-ai-act.pdf, p. 57);\n- data collection processes and the origin of the data, and, for personal data, the original purpose of the data collection (eu-ai-act.pdf, p. 57);\n- relevant data-preparation processing operations, such as annotation, labelling, cleaning, updating, enrichment and aggregation (eu-ai-act.pdf, p. 57);\n- the formulation of assumptions, in particular about the information the data are supposed to measure and represent (eu-ai-act.pdf, p. 57);\n- an assessment of the availability, quantity and suitability of the data sets that are needed (eu-ai-act.pdf, p. 57);\n- examination for possible biases that are likely to affect health and safety, have a negative impact on fundamental rights, or lead to discrimination prohibited under Union law, especially where data outputs influence inputs for future operations (eu-ai-act.pdf, p. 57);\n- appropriate measures to detect, prevent and mitigate possible biases identified through that examination (eu-ai-act.pdf, p. 57); and\n- the identification of relevant data gaps or shortcomings that prevent compliance with the Regulation, and how those gaps and shortcomings can be addressed (eu-ai-act.pdf, p. 57).\n\nThe documents also state that high-quality training, validation and testing data sets require appropriate data governance and management practices, and that such data sets should be relevant, sufficiently representative, and, to the best extent possible, free of errors and complete in view of the intended purpose (eu-ai-act.pdf, p. 19). For personal data, data governance and management practices should include transparency about the original purpose of the data collection (eu-ai-act.pdf, p. 19). The documents further say that these data-governance requirements can be complied with by using third parties that offer certified compliance services, including verification of data governance, data set integrity, and data training, validation and testing practices (eu-ai-act.pdf, p. 19)."
+    }
+  },
+  "bias-special-data": {
+    "input_hash": "14ca05308656f8516d117cb165839fd08f115d6b8de1f6ace3579e527830de77",
+    "status": "ok",
+    "verdict": {
+      "question_id": "bias-special-data",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        58,
+        19,
+        57,
+        19
+      ],
+      "answer_text": "Yes. Providers may exceptionally process special categories of personal data to detect and correct bias, but only subject to appropriate safeguards and all of the listed conditions, including that bias detection and correction cannot be effectively achieved using other data, such as synthetic or anonymised data. (eu-ai-act.pdf, p. 58)"
+    }
+  },
+  "technical-documentation": {
+    "input_hash": "3db1fb4a8cd00e40c0455aa187b43083bd55171e33d7167ccc850e49859a2896",
+    "status": "ok",
+    "verdict": {
+      "question_id": "technical-documentation",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        20,
+        59,
+        58,
+        55
+      ],
+      "answer_text": "The technical documentation of a high-risk AI system must contain, at a minimum, the elements set out in Annex IV. It must also be drawn up so that it demonstrates the system’s compliance with the relevant requirements and gives national competent authorities and notified bodies clear, comprehensive information to assess that compliance. (eu-ai-act.pdf, p. 58)"
+    }
+  },
+  "log-retention": {
+    "input_hash": "ccec7c2168b5889daf1a8289a3d8d1b2acc100b22eaf5d03c289ec80f822de3b",
+    "status": "ok",
+    "verdict": {
+      "question_id": "log-retention",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        59,
+        64,
+        20,
+        68
+      ],
+      "answer_text": "Providers of high‑risk AI systems must keep the automatically generated logs for a period appropriate to the intended purpose of the system, of at least six months, unless otherwise required by applicable Union or national law (e.g., data‑protection law). (eu-ai-act.pdf, p. 64)"
+    }
+  },
+  "human-oversight": {
+    "input_hash": "b9caf1b361967917eba0b937c1c8c2f55490ba315aa7e0e96bc0128e1c3e6202",
+    "status": "ok",
+    "verdict": {
+      "question_id": "human-oversight",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        60,
+        21,
+        20,
+        55
+      ],
+      "answer_text": "High-risk AI systems must be designed and developed, including with appropriate human-machine interface tools, so that natural persons can effectively oversee them during the period in which they are in use (eu-ai-act.pdf, p. 60).\n\nThat human oversight must aim to prevent or minimise risks to health, safety, or fundamental rights that may emerge when the system is used as intended or under reasonably foreseeable misuse, particularly where such risks persist despite other requirements in the same Section (eu-ai-act.pdf, p. 60).\n\nThe oversight measures must be commensurate with the risks, the level of autonomy, and the context of use, and must be ensured through one or both of the types of measures provided in Article 14(3) (eu-ai-act.pdf, p. 60).\n\nThe documents further explain that natural persons should be able to oversee the system’s functioning, ensure it is used as intended, and address its impacts over the system’s lifecycle; providers should identify appropriate oversight measures before placing the system on the market or putting it into service; and, where appropriate, the system should have in-built operational constraints that cannot be overridden by the system itself, be responsive to the human operator, and provide mechanisms to help the assigned natural person decide when and how to intervene or stop the system, with that person having the necessary competence, training, and authority (eu-ai-act.pdf, p. 21)."
+    }
+  },
+  "accuracy-robustness": {
+    "input_hash": "471f2b71b6573f1aa7acacb5818d0a2987556e4229f210e049abe5bd8ed48939",
+    "status": "ok",
+    "verdict": {
+      "question_id": "accuracy-robustness",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        61,
+        21,
+        61,
+        59
+      ],
+      "answer_text": "High‑risk AI systems must be designed and developed to achieve an appropriate level of accuracy, robustness, and cybersecurity and to perform consistently in those respects throughout their lifecycle (eu-ai-act.pdf, p. 61).  \n\nThe appropriate levels of accuracy and robustness shall be measured using benchmarks and measurement methodologies encouraged by the Commission in cooperation with stakeholders and metrology/benchmarking authorities (eu-ai-act.pdf, p. 61).  \n\nThe levels of accuracy and the relevant accuracy metrics of high‑risk AI systems must be declared in the accompanying instructions for use (eu-ai-act.pdf, p. 61).  \n\nSystems shall be as resilient as possible to errors, faults, or inconsistencies that may arise within the system or its operating environment, including interactions with natural persons or other systems; technical and organisational measures (e.g., technical redundancy, backup or fail‑safe plans) shall be taken to achieve this robustness (eu-ai-act.pdf, p. 61).  \n\nFor systems that continue to learn after deployment, providers must eliminate or reduce as far as possible the risk of biased outputs influencing future inputs (feedback loops) and ensure any such feedback loops are addressed with appropriate mitigation measures (eu-ai-act.pdf, p. 61).  \n\nHigh‑risk AI systems must be resilient against attempts by unauthorised third parties to alter their use, outputs, or performance by exploiting system vulnerabilities; cybersecurity solutions must be appropriate to the relevant circumstances and risks (eu-ai-act.pdf, p. 61).  \n\nTechnical solutions to address AI‑specific cybersecurity vulnerabilities shall include, where appropriate, measures to prevent, detect, respond to, resolve, and control attacks such as data poisoning, model poisoning, adversarial examples/model evasion, confidentiality attacks, or model flaws (eu-ai-act.pdf, p. 61).  \n\nTechnical robustness is a key requirement: systems should be resilient to harmful or undesirable behaviour resulting from limitations within the system or its environment (e.g., errors, faults, inconsistencies, unexpected situations); technical and organisational measures, including fail‑safe plans that safely interrupt operation when anomalies occur or operation leaves predetermined boundaries, should be implemented to ensure robustness (eu-ai-act.pdf, p. 21)."
+    }
+  },
+  "adversarial-attacks": {
+    "input_hash": "72e56fe7d7a872ff95ac7d81df7e23fc3bc61141aed4d0cc9a9fac578b1400ae",
+    "status": "ok",
+    "verdict": {
+      "question_id": "adversarial-attacks",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        61,
+        22,
+        21,
+        61
+      ],
+      "answer_text": "High-risk AI systems must be resilient against attempts by unauthorised third parties to alter their use, outputs, or performance by exploiting system vulnerabilities (eu-ai-act.pdf, p. 61).\n\nThe required cybersecurity measures must be appropriate to the relevant circumstances and risks, and, where appropriate, must include measures to prevent, detect, respond to, resolve, and control attacks that:\n\n- manipulate the training data set (data poisoning),\n- manipulate pre-trained components used in training (model poisoning),\n- use inputs designed to cause the AI model to make a mistake (adversarial examples or model evasion),\n- target confidentiality, or\n- exploit model flaws (eu-ai-act.pdf, p. 61).\n\nProviders should also take suitable measures, such as security controls, taking into account the underlying ICT infrastructure where appropriate (eu-ai-act.pdf, p. 22)."
+    }
+  },
+  "corrective-actions": {
+    "input_hash": "6e3623976018e0fae941004dcf3311d17d695e781fd7376f481d84f5aa75cdd4",
+    "status": "ok",
+    "verdict": {
+      "question_id": "corrective-actions",
+      "expects_refusal": false,
+      "passed": false,
+      "refused": false,
+      "missing_keywords": [
+        "recall"
+      ],
+      "page_match": false,
+      "cited_pages": [
+        66,
+        62,
+        66,
+        67
+      ],
+      "answer_text": "A provider must take the necessary corrective actions and provide the information required under Article 20 (eu-ai-act.pdf, p. 62)."
+    }
+  },
+  "authorised-representative": {
+    "input_hash": "863e44e378655ab966e3fd4498203da19ec5d542cf6ae6db06b87577c0ba5d77",
+    "status": "ok",
+    "verdict": {
+      "question_id": "authorised-representative",
+      "expects_refusal": false,
+      "passed": false,
+      "refused": false,
+      "missing_keywords": [
+        "written mandate"
+      ],
+      "page_match": true,
+      "cited_pages": [
+        65,
+        64,
+        85,
+        85
+      ],
+      "answer_text": "Prior to making their high‑risk AI systems available on the Union market, providers established in third countries must appoint an authorised representative. (eu-ai-act.pdf, p.64)"
+    }
+  },
+  "deployer-obligations": {
+    "input_hash": "5a7722db3d86435513aae154152d36e5ea9a3143031532284f6f58458db4a128",
+    "status": "ok",
+    "verdict": {
+      "question_id": "deployer-obligations",
+      "expects_refusal": false,
+      "passed": false,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        59,
+        20,
+        62,
+        66
+      ],
+      "answer_text": "Deployers of high‑risk AI systems must ensure that the system’s operation is sufficiently transparent so they can interpret its output and use it appropriately (eu‑ai‑act.pdf, p.59). They must receive and follow the instructions for use, which include the provider’s contact details, the system’s characteristics, capabilities and limitations (including accuracy metrics, robustness, cybersecurity and known/foreseeable circumstances affecting performance), and information on deployer actions that may influence system behaviour and lead to risks to health, safety or fundamental rights (eu‑ai‑act.pdf, p.59). Deployers are required to understand how the AI system works, evaluate its functionality, and comprehend its strengths and limitations (eu‑ai‑act.pdf, p.20). They must ensure that their use of the system—including any actions they take—does not create risks to health, safety or fundamental rights, taking into account known or foreseeable circumstances related to the intended purpose or reasonably foreseeable misuse (eu‑ai‑act.pdf, p.20; eu‑ai‑act.pdf, p.59). Finally, deployers must comply with the human oversight measures set out in the instructions, which are intended to facilitate the interpretation of the AI system’s outputs (eu‑ai‑act.pdf, p.20)."
+    }
+  },
+  "fria": {
+    "input_hash": "62bfb19a8c4a71d91bba8edb3e58fc8eb8cb14805a9d403114a8e0c36d34749e",
+    "status": "ok",
+    "verdict": {
+      "question_id": "fria",
+      "expects_refusal": false,
+      "passed": false,
+      "refused": false,
+      "missing_keywords": [
+        "public law"
+      ],
+      "page_match": true,
+      "cited_pages": [
+        69,
+        25,
+        26,
+        69
+      ],
+      "answer_text": "Private entities providing public services and deployers of high‑risk AI systems referred to in points 5(b) and 5(c) of Annex III must perform a fundamental rights impact assessment before deploying a high‑risk AI system (eu‑ai‑act.pdf, p. 69; eu‑ai‑act.pdf, p. 25)."
+    }
+  },
+  "transparency-chatbot": {
+    "input_hash": "d30d136fa385a44ee0ee5e644a5da5fa2ad94048e5d7435dff89c56399a1fe51",
+    "status": "ok",
+    "verdict": {
+      "question_id": "transparency-chatbot",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        33,
+        8,
+        8,
+        31
+      ],
+      "answer_text": "Yes. Natural persons should be notified that they are interacting with an AI system, unless that is obvious to a reasonably well-informed, observant and circumspect person given the circumstances and context of use (eu-ai-act.pdf, p. 33). An online chatbot is described as an AI system (eu-ai-act.pdf, p. 31)."
+    }
+  },
+  "synthetic-marking": {
+    "input_hash": "d8dda588ca46d33513fd98b7263ef80d9389289d967d3593c4dc7a9856622804",
+    "status": "ok",
+    "verdict": {
+      "question_id": "synthetic-marking",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        34,
+        34,
+        82,
+        82
+      ],
+      "answer_text": "Yes. Providers of AI systems that generate synthetic audio, image, video, or text content must ensure the outputs are marked in a machine-readable format and detectable as artificially generated or manipulated, subject to exceptions such as assistive standard editing, systems that do not substantially alter the input data, or use authorised by law for criminal-offence detection, prevention, investigation, or prosecution (eu-ai-act.pdf, p. 82).\n\nAdditionally, deployers of AI systems that generate or manipulate image, audio, or video content constituting a deep fake must disclose that the content has been artificially generated or manipulated, with limited exceptions (eu-ai-act.pdf, p. 82)."
+    }
+  },
+  "deepfake-disclosure": {
+    "input_hash": "310ec0ddb450dfb42e1f72d48d729b0db012f3d34330627791dcd107b127b998",
+    "status": "ok",
+    "verdict": {
+      "question_id": "deepfake-disclosure",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        34,
+        34,
+        82,
+        82
+      ],
+      "answer_text": "Deployers must disclose that the AI‑generated deep‑fake content has been artificially created or manipulated – i.e., they must label the AI output accordingly and disclose its artificial origin in a clear and distinguishable manner (eu-ai-act.pdf, p.34; eu-ai-act.pdf, p.82)."
+    }
+  },
+  "gpai-systemic": {
+    "input_hash": "dd828911f2c084c5b786d413791e3a45332bd7ee9e6dfc9322e518c959bcd3de",
+    "status": "ok",
+    "verdict": {
+      "question_id": "gpai-systemic",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        29,
+        29,
+        83,
+        83
+      ],
+      "answer_text": "A general‑purpose AI model is classified as presenting systemic risk when it meets any of the conditions set out in Article 51(1) of the AI Act:  \n\n- it has **high impact capabilities** evaluated on the basis of appropriate technical tools and methodologies, including indicators and benchmarks; **or**  \n- based on a **Commission decision** (ex officio or following a qualified alert from the scientific panel) it has capabilities or an impact equivalent to those high‑impact capabilities, having regard to the criteria in Annex XIII.  \n\nAdditionally, a model is **presumed** to have high impact capabilities—and thus to be classified as systemic risk—when the cumulative amount of computation used for its training, measured in floating‑point operations, is **greater than 10²⁵** (Article 51(2)).  \n\n(eu‑ai‑act.pdf, p. 83)"
+    }
+  },
+  "gpai-obligations": {
+    "input_hash": "d850fc84177e5154abb21839adf707e7948217a08568641799c15a99406c14f5",
+    "status": "ok",
+    "verdict": {
+      "question_id": "gpai-obligations",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        26,
+        85,
+        28,
+        84
+      ],
+      "answer_text": "Based on the excerpts, providers of general-purpose AI models have the following obligations:\n\n- **Prepare and keep up-to-date technical documentation** for the general-purpose AI model and make it available, upon request, to the AI Office and national competent authorities (eu-ai-act.pdf, p. 26; eu-ai-act.pdf, p. 84).\n\n- **Draw up, keep up-to-date, and make available information and documentation** to providers of AI systems who intend to integrate the general-purpose AI model into their AI systems. This information must:\n  - enable downstream providers to understand the model’s capabilities and limitations and to comply with the AI Act; and\n  - include, at a minimum, the elements set out in Annex XII (eu-ai-act.pdf, p. 84).\n\n- **Put in place a policy to comply with Union copyright and related rights**, including identifying and complying with rights reservations expressed under Article 4(3) of Directive (EU) 2019/790 (eu-ai-act.pdf, p. 84).\n\n- **Draw up and make publicly available a sufficiently detailed summary** of the content used to train the general-purpose AI model, according to a template provided by the AI Office (eu-ai-act.pdf, p. 84).\n\n- **For general-purpose AI models with systemic risk**, providers must, in addition to the obligations listed in Articles 53 and 54, **perform model evaluation in accordance with standardised protocols and tools reflecting the state of the art**, including conducting and documenting evaluation-related steps (eu-ai-act.pdf, p. 85).\n\nThe excerpts also state that compliance with these obligations should be **commensurate and proportionate** to the type of model provider, with simplified compliance options for SMEs and start-ups, and that obligations for a modification or fine-tuning should be limited to that modification or fine-tuning, for example by updating existing technical documentation with information on the modifications, including new training data sources (eu-ai-act.pdf, p. 28)."
+    }
+  },
+  "codes-of-practice": {
+    "input_hash": "53d123796160dd859886781875bba1583bacb0ba1de891d2a477c9c780dafa8c",
+    "status": "ok",
+    "verdict": {
+      "question_id": "codes-of-practice",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        87,
+        30,
+        44,
+        121
+      ],
+      "answer_text": "2 May 2025 (eu-ai-act.pdf, p. 87)."
+    }
+  },
+  "sandboxes": {
+    "input_hash": "c4ded440f4f6bb33e036f980ec02f3592842ef81203a07236f04313d32d176bd",
+    "status": "ok",
+    "verdict": {
+      "question_id": "sandboxes",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        35,
+        88,
+        88,
+        90
+      ],
+      "answer_text": "Yes. Member States must ensure that their competent authorities establish at least one AI regulatory sandbox at the national level (or fulfil this obligation by participating in an existing sandbox that provides equivalent national coverage). (eu-ai-act.pdf, p. 88)"
+    }
+  },
+  "eu-database": {
+    "input_hash": "e53311e45bff9ff3c26322067d283e6efedf969c0b7fc492ab41b7de6972a62d",
+    "status": "ok",
+    "verdict": {
+      "question_id": "eu-database",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        33,
+        33,
+        100,
+        81
+      ],
+      "answer_text": "The EU database is a database containing registration information concerning high-risk AI systems, as well as certain AI systems not considered high-risk (eu-ai-act.pdf, p. 100). The Commission shall, in collaboration with the Member States, set up and maintain it (eu-ai-act.pdf, p. 100)."
+    }
+  },
+  "serious-incident": {
+    "input_hash": "5b2073b77f56d5ad72ede6efa3409cf1315d0edf827269af43821a995e35da50",
+    "status": "ok",
+    "verdict": {
+      "question_id": "serious-incident",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        101,
+        20,
+        102,
+        59
+      ],
+      "answer_text": "A provider must report a serious incident involving a high-risk AI system **immediately after establishing a causal link—or a reasonable likelihood of such a link—and in any event no later than 15 days** after the provider or, where applicable, the deployer becomes aware of it (eu-ai-act.pdf, p. 101).\n\nShorter deadlines apply in specific cases:\n- **Widespread infringement or a serious incident under Article 3(49)(b):** immediately, and no later than **2 days** (eu-ai-act.pdf, p. 101).\n- **Death of a person:** immediately after the causal relationship is established or suspected, and no later than **10 days** (eu-ai-act.pdf, p. 101)."
+    }
+  },
+  "penalties-prohibited": {
+    "input_hash": "b075b6f3e55a580d83c8d16601f081125471ea3cce7e103abd8222748653958d",
+    "status": "ok",
+    "verdict": {
+      "question_id": "penalties-prohibited",
+      "expects_refusal": false,
+      "passed": false,
+      "refused": false,
+      "missing_keywords": [
+        "35 000 000",
+        "whichever is higher"
+      ],
+      "page_match": false,
+      "cited_pages": [
+        51,
+        117,
+        87,
+        117
+      ],
+      "answer_text": "The maximum fine for violating the AI Act’s prohibited AI practices is up to EUR 1,500,000. (eu-ai-act.pdf, p.117)"
+    }
+  },
+  "entry-into-force": {
+    "input_hash": "e49f386a82e45f32f7172303b7bc4465c3e7ebdc85c2d7fb002a1b2217a97d2c",
+    "status": "ok",
+    "verdict": {
+      "question_id": "entry-into-force",
+      "expects_refusal": false,
+      "passed": false,
+      "refused": false,
+      "missing_keywords": [
+        "twentieth day",
+        "2 August 2026"
+      ],
+      "page_match": false,
+      "cited_pages": [
+        121,
+        44,
+        121,
+        87
+      ],
+      "answer_text": "The AI Act entered into force on 2 February 2025 (eu-ai-act.pdf, p.44). Its provisions apply from 2 August 2025 (eu-ai-act.pdf, p.44)."
+    }
+  },
+  "phased-dates": {
+    "input_hash": "7edc104aa6308fc3d55906239b4d35a8ae0e46fc886d6550c29db8caa5c6b8d7",
+    "status": "ok",
+    "verdict": {
+      "question_id": "phased-dates",
+      "expects_refusal": false,
+      "passed": true,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": true,
+      "cited_pages": [
+        44,
+        121,
+        121,
+        87
+      ],
+      "answer_text": "Before 2 August 2026, the excerpts identify the following earlier application dates:\n\n- **Prohibitions**: the application of the prohibitions is tied to **2 February 2025** (eu-ai-act.pdf, p. 44).\n- **Notified bodies and governance structure**: these provisions should apply from **2 August 2025** (eu-ai-act.pdf, p. 44).\n- **Obligations for providers of general-purpose AI models**: these should apply from **2 August 2025** (eu-ai-act.pdf, p. 44).\n- **Penalties**: the provisions on penalties should apply from **2 August 2025** (eu-ai-act.pdf, p. 44)."
+    }
+  },
+  "capital-of-australia": {
+    "input_hash": "9d2b56df52183373070d1fd89d8158871cafad6b84580286775fbd023891c64f",
+    "status": "ok",
+    "verdict": {
+      "question_id": "capital-of-australia",
+      "expects_refusal": true,
+      "passed": true,
+      "refused": true,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        95,
+        5,
+        29,
+        50
+      ],
+      "answer_text": "I couldn't find that in the documents."
+    }
+  },
+  "sourdough-starter": {
+    "input_hash": "8941b8bb705200e61bf01b57baf9d4b306469f27cdf6e0eef9c93e250549b46d",
+    "status": "ok",
+    "verdict": {
+      "question_id": "sourdough-starter",
+      "expects_refusal": true,
+      "passed": true,
+      "refused": true,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        94,
+        35,
+        35,
+        36
+      ],
+      "answer_text": "I couldn't find that in the documents."
+    }
+  },
+  "euro-2024-final": {
+    "input_hash": "1de715d099bd32ddcd3be3019243f4d25225ad1c719301bfca2fc947bacc7dbc",
+    "status": "ok",
+    "verdict": {
+      "question_id": "euro-2024-final",
+      "expects_refusal": true,
+      "passed": true,
+      "refused": true,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        120,
+        120,
+        121,
+        118
+      ],
+      "answer_text": "I couldn't find that in the documents."
+    }
+  },
+  "ml-framework": {
+    "input_hash": "f3b9fe8dca0ff609b68657ed4dfdc377de221377726f027a8718b8ec8515f2fe",
+    "status": "ok",
+    "verdict": {
+      "question_id": "ml-framework",
+      "expects_refusal": true,
+      "passed": true,
+      "refused": true,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        35,
+        90,
+        4,
+        27
+      ],
+      "answer_text": "I couldn't find that in the documents."
+    }
+  },
+  "gdpr-cookies": {
+    "input_hash": "4b604641eec53dfd5546e74f69eb32576a6ac2756d98bc2cc7a54564e6ead360",
+    "status": "ok",
+    "verdict": {
+      "question_id": "gdpr-cookies",
+      "expects_refusal": true,
+      "passed": true,
+      "refused": true,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        117,
+        42,
+        115,
+        117
+      ],
+      "answer_text": "I couldn't find that in the documents."
+    }
+  },
+  "brussels-weather": {
+    "input_hash": "c9585f9fa8652dd513e81c680383c94ad446eafc5ec7fb881cc065e5cb6fb31d",
+    "status": "ok",
+    "verdict": {
+      "question_id": "brussels-weather",
+      "expects_refusal": true,
+      "passed": true,
+      "refused": true,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        36,
+        44,
+        93,
+        22
+      ],
+      "answer_text": "I couldn't find that in the documents."
+    }
+  },
+  "ai-haiku": {
+    "input_hash": "2cdd748f930bd18c4758a9cb007566774535171f8f84b148e571585769ccb710",
+    "status": "ok",
+    "verdict": {
+      "question_id": "ai-haiku",
+      "expects_refusal": true,
+      "passed": false,
+      "refused": false,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        4,
+        8,
+        33,
+        15
+      ],
+      "answer_text": "machines learn alone (eu-ai-act.pdf, p. 4)\nhuman agency guides it (eu-ai-act.pdf, p. 8)\nsynthetic blurs, hard (eu-ai-act.pdf, p. 33)"
+    }
+  },
+  "quantum-computing": {
+    "input_hash": "84e9799bb4fa6055ffc90cfe6950a4e6aa9ac39c7c29e2eef788df4ea35a7688",
+    "status": "ok",
+    "verdict": {
+      "question_id": "quantum-computing",
+      "expects_refusal": true,
+      "passed": true,
+      "refused": true,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        95,
+        95,
+        4,
+        50
+      ],
+      "answer_text": "I couldn't find that in the documents."
+    }
+  },
+  "us-comparison": {
+    "input_hash": "bc847a2b44b594586e00e970d4490f5833327d802c1543bdce97d2cf623c0cd3",
+    "status": "ok",
+    "verdict": {
+      "question_id": "us-comparison",
+      "expects_refusal": true,
+      "passed": true,
+      "refused": true,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        45,
+        120,
+        1,
+        6
+      ],
+      "answer_text": "I couldn't find that in the documents."
+    }
+  },
+  "annex-iii-list": {
+    "input_hash": "641f7dbed551fc9bcc2d86a390ce906ddf7fad80f4f9af253f27055fda726d7a",
+    "status": "ok",
+    "verdict": {
+      "question_id": "annex-iii-list",
+      "expects_refusal": true,
+      "passed": true,
+      "refused": true,
+      "missing_keywords": [],
+      "page_match": false,
+      "cited_pages": [
+        53,
+        53,
+        55,
+        69
+      ],
+      "answer_text": "I couldn't find that in the documents."
+    }
+  }
+}
