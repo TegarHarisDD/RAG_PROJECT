@@ -1,7 +1,13 @@
 """FastAPI application entry point."""
 import os
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
+
+# Backend configuration lives in .env (see .env.example); secrets never
+# leave this process or get committed.
+load_dotenv()
+
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="rag-portfolio-demo")

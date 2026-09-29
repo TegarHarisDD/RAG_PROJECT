@@ -4,11 +4,11 @@
 
 **Blocked by:** None (can start immediately).
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Frontend scaffolded with Vite (React + TypeScript + Tailwind), starts and renders a placeholder page
-- [ ] Backend scaffolded with FastAPI, starts and serves the API
-- [ ] `GET /health` returns an OK response suitable for hosting-platform checks
-- [ ] README stub exists (title, one-line description, how to run both halves)
-- [ ] Git repo initialized (`git init`) with the scaffold as the first commit
-- [ ] Environment/config convention established (secrets only in backend env, none committed)
+- [x] Frontend scaffolded with Vite (React + TypeScript + Tailwind), starts and renders a placeholder page
+- [x] Backend scaffolded with FastAPI, starts and serves the API
+- [x] `GET /health` returns an OK response suitable for hosting-platform checks
+- [x] README stub exists (title, one-line description, how to run both halves)
+- [x] Git repo initialized (`git init`) with the scaffold as the first commit
+- [x] Environment/config convention established (secrets only in backend env, none committed)
