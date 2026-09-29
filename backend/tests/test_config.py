@@ -1,7 +1,7 @@
 """Provider configuration: model IDs live in config, never hardcoded."""
 import pytest
 
-from app.config import load_provider_config, load_retrieval_config
+from app.config import load_abuse_config, load_provider_config, load_retrieval_config
 
 
 def test_default_models_match_the_spec_free_chain() -> None:
@@ -77,3 +77,43 @@ def test_top_k_must_be_positive_and_temperature_bounded() -> None:
         load_retrieval_config(env={"TOP_K": "-3"})
     with pytest.raises(ValueError, match="ANSWER_TEMPERATURE"):
         load_retrieval_config(env={"ANSWER_TEMPERATURE": "5"})
+
+
+def test_abuse_defaults_match_the_spec() -> None:
+    """5 Questions/hour/IP, a 500-character cap, and a ~40/day global stop —
+    the spec's abuse protection, sitting under the free daily provider cap."""
+    config = load_abuse_config(env={})
+
+    assert config.max_question_chars == 500
+    assert config.questions_per_ip_per_hour == 5
+    assert config.daily_question_limit == 40
+
+
+def test_env_overrides_abuse_limits() -> None:
+    """Limits are tuning knobs, not constants — the owner can tighten them."""
+    config = load_abuse_config(
+        env={
+            "QUESTION_MAX_CHARS": "200",
+            "RATE_LIMIT_PER_HOUR": "3",
+            "DAILY_QUESTION_LIMIT": "20",
+        }
+    )
+
+    assert (config.max_question_chars, config.questions_per_ip_per_hour,
+            config.daily_question_limit) == (200, 3, 20)
+
+
+def test_malformed_abuse_values_raise_clean_errors() -> None:
+    """A non-numeric limit is a readable config error, never a raw traceback."""
+    with pytest.raises(ValueError, match="RATE_LIMIT_PER_HOUR"):
+        load_abuse_config(env={"RATE_LIMIT_PER_HOUR": "five"})
+
+
+def test_abuse_limits_must_be_positive() -> None:
+    """A zero or negative limit would silently reject every visitor — a config
+    mistake must surface at startup, not as a mysteriously dead demo."""
+    for name in ("QUESTION_MAX_CHARS", "RATE_LIMIT_PER_HOUR", "DAILY_QUESTION_LIMIT"):
+        with pytest.raises(ValueError, match=name):
+            load_abuse_config(env={name: "0"})
+        with pytest.raises(ValueError, match=name):
+            load_abuse_config(env={name: "-1"})

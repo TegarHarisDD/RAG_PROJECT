@@ -99,6 +99,63 @@ def build_prompt(question: str, citations: Sequence[Citation]) -> str:
     )
 
 
+@dataclass(frozen=True)
+class TokenEvent:
+    """One streamed answer fragment."""
+
+    text: str
+
+
+@dataclass(frozen=True)
+class FinalEvent:
+    """The turn's outcome: a Refusal (``refused=True``) or the cited Answer."""
+
+    answer: Answer
+
+
+def ask_stream(
+    question: str,
+    *,
+    config: ProviderConfig,
+    retrieval: RetrievalConfig,
+    store: ChunkStore,
+    embed_fn: Callable[..., list[list[float]]] = embed,
+    generate_fn: Callable[..., Iterator[str]] = generate,
+    on_attempt: Callable[[str, str | None], None] | None = None,
+) -> Iterator[TokenEvent | FinalEvent]:
+    """One end-to-end turn as an event stream: tokens as they arrive, then the
+    turn's single outcome.
+
+    The streaming seam the /ask endpoint (ticket 06) consumes — it maps these
+    events onto SSE — while ``ask`` remains the collect-everything form the
+    CLI uses. When retrieval finds nothing, the Refusal is the final event
+    with no tokens and no LLM call — the shared free daily cap is not spent on
+    a question the Corpus cannot answer (ADR-0001). When generation fails, the
+    ``GenerationError`` propagates to the consumer's error boundary.
+    """
+    citations = retrieve(
+        question, config=config, retrieval=retrieval, store=store, embed_fn=embed_fn
+    )
+    if not citations:
+        yield FinalEvent(
+            Answer(question=question, text=REFUSAL_MESSAGE, citations=(), refused=True)
+        )
+        return
+
+    tokens: list[str] = []
+    for token in generate_fn(
+        build_prompt(question, citations),
+        config=config,
+        temperature=retrieval.temperature,
+        on_attempt=on_attempt,
+    ):
+        tokens.append(token)
+        yield TokenEvent(token)
+    yield FinalEvent(
+        Answer(question=question, text="".join(tokens), citations=citations, refused=False)
+    )
+
+
 def ask(
     question: str,
     *,
@@ -112,32 +169,21 @@ def ask(
 ) -> Answer:
     """One end-to-end turn: retrieve, assemble the Prompt, stream the answer.
 
-    Tokens flow to ``on_token`` as they arrive (the CLI prints them; the API
-    will forward them as SSE events), while ``on_attempt`` reaches the
-    provider chain unchanged so the fallback stays observable. When retrieval
-    finds nothing, the Refusal is returned without an LLM call — the shared
-    free daily cap is not spent on a question the Corpus cannot answer
-    (ADR-0001). When generation fails, the ``GenerationError`` propagates to
-    the caller's error boundary.
+    The collect-everything form of ``ask_stream``: tokens flow to ``on_token``
+    as they arrive (the CLI prints them), and the final ``Answer`` is returned.
     """
-    citations = retrieve(
-        question, config=config, retrieval=retrieval, store=store, embed_fn=embed_fn
-    )
-    if not citations:
-        return Answer(
-            question=question, text=REFUSAL_MESSAGE, citations=(), refused=True
-        )
-
-    tokens: list[str] = []
-    for token in generate_fn(
-        build_prompt(question, citations),
+    for event in ask_stream(
+        question,
         config=config,
-        temperature=retrieval.temperature,
+        retrieval=retrieval,
+        store=store,
+        embed_fn=embed_fn,
+        generate_fn=generate_fn,
         on_attempt=on_attempt,
     ):
-        tokens.append(token)
-        if on_token:
-            on_token(token)
-    return Answer(
-        question=question, text="".join(tokens), citations=citations, refused=False
-    )
+        if isinstance(event, TokenEvent):
+            if on_token:
+                on_token(event.text)
+        else:
+            return event.answer
+    raise AssertionError("ask_stream ended without a FinalEvent")  # pragma: no cover

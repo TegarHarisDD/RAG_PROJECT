@@ -17,7 +17,17 @@ import pytest
 from app.config import ProviderConfig, RetrievalConfig
 from app.ingest import IngestMeta, IngestError
 from app.providers import GenerationError
-from app.rag import REFUSAL_MESSAGE, Citation, Answer, ask, build_prompt, retrieve
+from app.rag import (
+    REFUSAL_MESSAGE,
+    Answer,
+    Citation,
+    FinalEvent,
+    TokenEvent,
+    ask,
+    ask_stream,
+    build_prompt,
+    retrieve,
+)
 
 TEST_CONFIG = ProviderConfig(
     openrouter_api_key="test-key",
@@ -245,6 +255,47 @@ class TestAsk:
                 embed_fn=question_embed([[0.1]]),
                 generate_fn=failing_generate,
             )
+
+
+class TestAskStream:
+    """The event-stream seam the /ask endpoint consumes (ticket 06)."""
+
+    def test_yields_each_token_then_the_cited_answer(self) -> None:
+        """Tokens arrive as they are generated; the final event carries the Answer."""
+        store = FakeStore([hit(0, "obligations text")])
+        generate_fn = fake_generate([["The ", "obligations ", "are..."]])
+
+        events = list(ask_stream(
+            "Which obligations apply?",
+            config=TEST_CONFIG, retrieval=TEST_RETRIEVAL, store=store,
+            embed_fn=question_embed([[0.1]]), generate_fn=generate_fn,
+        ))
+
+        assert events[:3] == [TokenEvent("The "), TokenEvent("obligations "), TokenEvent("are...")]
+        (final,) = events[3:]
+        assert final == FinalEvent(Answer(
+            question="Which obligations apply?",
+            text="The obligations are...",
+            citations=(Citation("eu-ai-act.pdf", 12, 0, "obligations text", 0.9),),
+            refused=False,
+        ))
+
+    def test_yields_a_refusal_event_without_tokens_when_nothing_was_retrieved(self) -> None:
+        """The Refusal is one distinct final event — no token events precede it."""
+        generate_fn = fake_generate([["should never be reached"]])
+
+        events = list(ask_stream(
+            "What is the capital of France?",
+            config=TEST_CONFIG, retrieval=TEST_RETRIEVAL,
+            store=FakeStore(), embed_fn=question_embed([[0.1]]),
+            generate_fn=generate_fn,
+        ))
+
+        assert events == [FinalEvent(Answer(
+            question="What is the capital of France?",
+            text=REFUSAL_MESSAGE, citations=(), refused=True,
+        ))]
+        assert generate_fn.calls == []
 
 
 def test_safe_print_replaces_characters_the_console_cannot_encode() -> None:

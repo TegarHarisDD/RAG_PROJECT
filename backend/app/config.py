@@ -75,6 +75,47 @@ def load_retrieval_config(env: Mapping[str, str] | None = None) -> RetrievalConf
 
 
 @dataclass(frozen=True)
+class AbuseConfig:
+    """The abuse limits (spec: enforced in the FastAPI layer, under the free
+    provider caps so real visitor traffic always has headroom)."""
+
+    max_question_chars: int
+    questions_per_ip_per_hour: int
+    daily_question_limit: int
+
+
+def load_abuse_config(env: Mapping[str, str] | None = None) -> AbuseConfig:
+    """Read abuse limits from ``env`` (defaults to the process environment).
+
+    Mirrors ``load_retrieval_config``: tests pass ``env=`` explicitly. A zero
+    or negative limit would silently reject every visitor, so it raises at
+    startup instead of becoming a mysteriously dead demo.
+    """
+    if env is None:
+        load_dotenv()
+    source = os.environ if env is None else env
+    config = AbuseConfig(
+        max_question_chars=_numeric_setting(
+            "QUESTION_MAX_CHARS", source, 500, int
+        ),
+        questions_per_ip_per_hour=_numeric_setting(
+            "RATE_LIMIT_PER_HOUR", source, 5, int
+        ),
+        daily_question_limit=_numeric_setting(
+            "DAILY_QUESTION_LIMIT", source, 40, int
+        ),
+    )
+    for name, value in (
+        ("QUESTION_MAX_CHARS", config.max_question_chars),
+        ("RATE_LIMIT_PER_HOUR", config.questions_per_ip_per_hour),
+        ("DAILY_QUESTION_LIMIT", config.daily_question_limit),
+    ):
+        if value < 1:
+            raise ValueError(f"{name} must be at least 1, got {value}")
+    return config
+
+
+@dataclass(frozen=True)
 class ProviderConfig:
     """Everything the OpenRouter wrappers need, as plain values."""
 
