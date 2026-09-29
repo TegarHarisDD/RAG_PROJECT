@@ -4,7 +4,7 @@
 
 **Blocked by:** 01 (project skeleton + health endpoint).
 
-**Status:** done
+**Status:** resolved
 
 - [x] `embed()` accepts a batch of texts and returns vectors; `generate()` streams tokens from a Prompt
 - [x] Embedding model ID and LLM fallback chain live in config, not hardcoded anywhere

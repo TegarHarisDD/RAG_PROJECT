@@ -4,7 +4,7 @@
 
 **Blocked by:** None (can start immediately).
 
-**Status:** done
+**Status:** resolved
 
 - [x] Frontend scaffolded with Vite (React + TypeScript + Tailwind), starts and renders a placeholder page
 - [x] Backend scaffolded with FastAPI, starts and serves the API
