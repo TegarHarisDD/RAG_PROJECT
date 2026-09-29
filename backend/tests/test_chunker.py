@@ -4,7 +4,7 @@ import pytest
 from app.chunker import chunk_pages, parse_pdf, strip_annexes
 
 # Exact word counter so token budgets are deterministic in tests. Production
-# uses the default ~4-chars-per-token heuristic.
+# uses the default ~3-chars-per-token heuristic.
 def count_words(text: str) -> int:
     return len(text.split())
 
@@ -156,7 +156,21 @@ def test_default_token_counter_keeps_prose_sized_like_the_spec() -> None:
     overlap = next(
         k for k in range(min(len(words0), len(words1)), 0, -1) if words0[-k:] == words1[:k]
     )
-    assert overlap >= 10  # ~80 heuristic tokens ≈ 50+ words of shared context
+    assert overlap >= 10  # ~80 heuristic tokens ≈ 40+ words of shared context
+
+
+def test_default_heuristic_leaves_headroom_under_the_model_ceiling() -> None:
+    """4 chars/token undershot the real tokenizer by >10% on the Corpus (549
+    actual vs <=500 estimated), blowing the embedding model's 512-token ceiling.
+    The default now budgets at ~3 chars/token: text the old heuristic fit into
+    one window no longer fits.
+    """
+    page = " ".join(f"regulation{1984 + i}" for i in range(400))
+
+    chunks = chunk_pages([page], source="corpus.pdf")
+
+    assert len(chunks) >= 2
+    assert all(len(c.text) <= 3 * 500 for c in chunks)
 
 
 def test_the_final_window_is_not_re_emitted_as_near_duplicates() -> None:

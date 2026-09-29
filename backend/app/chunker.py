@@ -18,9 +18,11 @@ from pathlib import Path
 
 import pypdf
 
-# ~4 characters per token is the standard heuristic for English prose; the
-# exact tokenizer of the free embedding model is unknown, and the spec's
-# "~500 tokens / ~80 overlap" targets are approximate by design.
+# ~3 characters per token, not the standard ~4: measured against the Corpus,
+# the real tokenizer of the free embedding model ran >10% denser than the 4/1
+# heuristic (549 actual vs <=500 estimated), which blew the model's 512-token
+# ceiling. The 3/1 estimate leaves headroom under that hard limit; the spec's
+# "~500 tokens / ~80 overlap" targets stay approximate by design.
 DEFAULT_MAX_TOKENS = 500
 DEFAULT_OVERLAP_TOKENS = 80
 
@@ -125,7 +127,7 @@ def _measure_for(
 
         def measure_by_prefix(start: int, end: int) -> int:
             chars = char_sums[end] - char_sums[start] + (end - start - 1)
-            return max(1, chars // 4)
+            return max(1, chars // 3)
 
         return measure_by_prefix
 
@@ -136,7 +138,7 @@ def _measure_for(
 
 
 def _default_count_tokens(text: str) -> int:
-    return max(1, len(text) // 4)
+    return max(1, len(text) // 3)
 
 
 def _window_end(
