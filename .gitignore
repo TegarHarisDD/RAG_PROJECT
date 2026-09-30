@@ -20,6 +20,9 @@ dist/
 .ruff_cache/
 *.log
 
+# Generated artifacts
+.scratch/**/corpus-chunks-dump.txt
+
 # OS
 .DS_Store
 Thumbs.db

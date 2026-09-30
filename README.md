@@ -277,7 +277,6 @@ negotiation `Accept: application/pdf`); details in
 [`corpus/README.md`](corpus/README.md).
 
 ## Project status
-
 Built to the MVP spec in `.scratch/rag-demo-mvp/` (spec + tickets). Tickets
 01–08 are implemented and reviewed; ticket 09 (deployment to Vercel/Render)
 lands the live URLs at the top of this README.
