@@ -71,7 +71,31 @@ python -m app.cli ask                                        # interactive debug
 
 ## Architecture
 
-```mermaid<br>flowchart LR<br>    subgraph browser [Browser]<br>        UI[React chat UI\nstreamed text, citation cards,\nrefusal / error / retry states]<br>    end<br>    subgraph backend [FastAPI backend]<br>        API["POST /ask (SSE)\n+ abuse limits (per-IP / daily)"]<br>        RAG["rag pipeline\nretrieve → prompt → stream"]<br>        PROV["provider wrappers\nembed() / generate()"]<br>        CHAIN["OpenRouter fallback chain\nfree models, config-ordered (ADR-0001)"]<br>    end<br>    subgraph storage [MongoDB Atlas M0]<br>        VS[("chunks collection\nvectors + text + page +\nembedding_model + dim (ADR-0002)\nvector search index")]<br>    end<br><br>    UI -->|Question| API<br>    API --> RAG<br>    RAG -->|embed Question| PROV --> CHAIN<br>    RAG -->|top-k Chunks| VS<br>    RAG -->|Prompt + Chunks| PROV<br>    PROV -->|answer tokens| RAG<br>    API -->|SSE: token* → citations / refusal / error| UI<br>```
+## Architecture
+
+```mermaid
+flowchart LR
+    subgraph browser [Browser]
+        UI["React chat UI<br/>streamed text, citation cards,<br/>refusal / error / retry states"]
+    end
+    subgraph backend [FastAPI backend]
+        API["POST /ask (SSE)<br/>+ abuse limits (per-IP / daily)"]
+        RAG["rag pipeline<br/>retrieve → prompt → stream"]
+        PROV["provider wrappers<br/>embed() / generate()"]
+        CHAIN["OpenRouter fallback chain<br/>free models, config-ordered (ADR-0001)"]
+    end
+    subgraph storage [MongoDB Atlas M0]
+        VS[("chunks collection<br/>vectors + text + page +<br/>embedding_model + dim (ADR-0002)<br/>vector search index")]
+    end
+
+    UI -->|Question| API
+    API --> RAG
+    RAG -->|embed Question| PROV --> CHAIN
+    RAG -->|top-k Chunks| VS
+    RAG -->|Prompt + Chunks| PROV
+    PROV -->|answer tokens| RAG
+    API -->|"SSE: token* → citations / refusal / error"| UI
+```
 
 One turn: the Question is embedded, Atlas Vector Search returns the top-4
 Chunks, the Prompt (system rules + Question + verbatim Chunks) goes to the
